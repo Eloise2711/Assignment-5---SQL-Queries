@@ -2,6 +2,7 @@ SELECT SUM(quantityOnHand) AS totalContainers
 FROM item 
 WHERE itemDescription LIKE '%antibiotics%';
 
+
 SELECT volunteerName
 FROM volunteer
 WHERE (volunteerTelephone NOT LIKE '2%' OR volunteerTelephone IS NULL) 
@@ -20,6 +21,7 @@ SELECT task.taskDescription
 FROM task
 LEFT JOIN assignment ON assignment.taskCode = task.taskCode
 WHERE assignment.volunteerId IS NULL;
+
 
 SELECT DISTINCT package_type.packageTypeName
 FROM package_type
@@ -84,6 +86,7 @@ FROM task
 JOIN task_type ON task.taskTypeId = task_type.taskTypeId
 WHERE task_type.taskTypeName NOT LIKE 'packing';
 
+
 SELECT item.itemDescription
 FROM item
 JOIN package_contents ON package_contents.itemId = item.itemId
@@ -91,6 +94,7 @@ JOIN package ON package_contents.packageId = package.packageId
 LEFT JOIN assignment ON package.taskCode = assignment.taskCode
 GROUP BY item.itemId, itemDescription
 HAVING COUNT(DISTINCT assignment.volunteerId) < 3;
+
 
 SELECT package_contents.packageId,
 SUM(item.itemValue * package_contents.itemQuantity) AS totalValue
